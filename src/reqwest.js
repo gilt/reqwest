@@ -341,7 +341,9 @@
 
     function timedOut() {
       self._timedOut = true
-      self.request.abort()
+      if(typeof self.request !== 'undefined' && typeof self.request.abort === 'function') {
+        self.request.abort();
+      }
     }
 
     function error(resp, msg, t) {
@@ -362,7 +364,9 @@
   Reqwest.prototype = {
     abort: function () {
       this._aborted = true
-      this.request.abort()
+      if(typeof this.request !== 'undefined' && typeof this.request.abort === 'function') {
+        this.request.abort();
+      }
     }
 
   , retry: function () {
